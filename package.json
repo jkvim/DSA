@@ -4,7 +4,7 @@
   "description": "Implement data structures and algorithms by Javascript",
   "main": "index.js",
   "scripts": {
-    "test": "mocha test/**/*.js -r esm"
+    "test": "mocha -w test/**/*.js -r esm"
   },
   "repository": {
     "type": "git",
