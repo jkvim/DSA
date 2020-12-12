@@ -4,6 +4,13 @@ export function TreeNode(value) {
   this.sibling = null
 }
 
+export function FiberNode(value) {
+  this.value = value
+  this.parent = null
+  this.child = null
+  this.sibling = null
+}
+
 
 function isEmpty(arr) {
   return arr && arr.length === 0
@@ -38,4 +45,31 @@ export function dfsRecursive(node, result = []) {
   }
 
   return result
+}
+
+let current = null
+
+function completeWork(fiber, visit) {
+  let workFiber = fiber
+  do {
+    const sibling = workFiber.sibling
+    if (sibling) {
+      current = sibling
+      return
+    }
+    workFiber = current = workFiber.parent
+  } while (workFiber !== null)
+}
+
+export function dfsIterate(rootFiber, visit) {
+  current = rootFiber
+  while (current !== null) {
+    visit(current)
+    const child = current.child
+    if (child) {
+      current = child
+    } else {
+      completeWork(current)
+    }
+  }
 }
