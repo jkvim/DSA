@@ -1,4 +1,3 @@
-import { expect } from 'chai';
 import Stack from '../src/stack';
 
 // 进制转换
@@ -59,26 +58,26 @@ describe('Stack', () => {
       while (s.size() > 0) {
         str += s.pop();
       }
-      expect(str).to.equal('A');
+      expect(str).toBe('A');
     });
   });
 
   describe('paren', () => {
     it('should return true when the bracket is match', () => {
       const exp = '1+(2 * 3)';
-      expect(paren(exp, 0, exp.length)).to.be.true;
+      expect(paren(exp, 0, exp.length)).toBe(true);
     });
 
     it('should return false when the bracket is not match', () => {
       const exp = '(1 * 2 - 3';
-      expect(paren(exp, 0, exp.length)).to.be.false;
+      expect(paren(exp, 0, exp.length)).toBe(false);
     });
   });
 
   describe('rpn evaluation', () => {
     it('should be able to calculate the rpn expression', () => {
       const rpn = '12+3*';
-      expect(rpnEvaluation(rpn)).to.equal(9);
+      expect(rpnEvaluation(rpn)).toBe(9);
     });
   });
 });

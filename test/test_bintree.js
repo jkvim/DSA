@@ -1,18 +1,17 @@
-import { expect } from 'chai';
 import { BinNode, BinTree } from '../src/binary_tree';
 import Queue from '../src/queue';
 
 describe('Binary Tree', () => {
   describe('max', () => {
     it('should return the max one', () => {
-      expect(BinTree.max(10, 9)).to.equal(10);
+      expect(BinTree.max(10, 9)).toBe(10);
     });
   });
 
   describe('empty', () => {
     it('should return true when the tree is empty', () => {
       const s = new BinTree();
-      expect(s.empty()).to.be.true;
+      expect(s.empty).toBe(true);
     });
   });
 
@@ -20,8 +19,8 @@ describe('Binary Tree', () => {
     it('should insert node as root', () => {
       const s = new BinTree();
       const r = s.insertAsRoot(0);
-      expect(s.root === r).to.be.true;
-      expect(s.size).to.equal(1);
+      expect(s.root === r).toBe(true);
+      expect(s.size).toBe(1);
     });
   });
 
@@ -30,9 +29,9 @@ describe('Binary Tree', () => {
       const s = new BinTree();
       const r = s.insertAsRoot(0);
       const lc = s.insertAsLC(r, 1);
-      expect(r.height).to.equal(1);
-      expect(s.size).to.equal(2);
-      expect(r.lc).to.eql(lc);
+      expect(r.height).toBe(1);
+      expect(s.size).toBe(2);
+      expect(r.lc).toEqual(lc);
     });
   });
 
@@ -41,9 +40,9 @@ describe('Binary Tree', () => {
       const s = new BinTree();
       const r = s.insertAsRoot(0);
       const rc = s.insertAsRC(r, 2);
-      expect(r.height).to.equal(1);
-      expect(s.size).to.equal(2);
-      expect(r.rc).to.eql(rc);
+      expect(r.height).toBe(1);
+      expect(s.size).toBe(2);
+      expect(r.rc).toEqual(rc);
     });
   });
 
@@ -57,9 +56,9 @@ describe('Binary Tree', () => {
       const t2 = new BinTree();
       const r2 = t2.insertAsRoot(0);
       t2.attachAsLC(r2, t1);
-      expect(t2.size).to.equal(5);
-      expect(r2.height).to.equal(4);
-      expect(r2.lc).to.eql(r1);
+      expect(t2.size).toBe(5);
+      expect(r2.height).toBe(4);
+      expect(r2.lc).toEqual(r1);
     });
   });
 
@@ -70,9 +69,9 @@ describe('Binary Tree', () => {
       const r1 = t1.insertAsRoot(0);
       const r2 = t2.insertAsRoot(1);
       t1.attachAsRC(r1, t2);
-      expect(t1.size).to.equal(2);
-      expect(r1.height).to.equal(1);
-      expect(r1.rc).to.eql(r2);
+      expect(t1.size).toBe(2);
+      expect(r1.height).toBe(1);
+      expect(r1.rc).toEqual(r2);
     });
   });
 
@@ -83,8 +82,8 @@ describe('Binary Tree', () => {
       for (let i = 1, node = r; i < 5; i++) {
         node = t.insertAsLC(node, i);
       }
-      expect(t.remove(r)).to.equal(5);
-      expect(t.size).to.equal(0);
+      expect(t.remove(r)).toBe(5);
+      expect(t.size).toBe(0);
     });
   });
 
@@ -96,8 +95,8 @@ describe('Binary Tree', () => {
         node = t.insertAsLC(node, i);
       }
       const subtree = t.secede(r.lc);
-      expect(subtree.size).to.equal(4);
-      expect(subtree.root.data).to.eql(1);
+      expect(subtree.size).toBe(4);
+      expect(subtree.root.data).toBe(1);
     });
   });
 
@@ -114,7 +113,7 @@ describe('Binary Tree', () => {
       }
       const output = [];
       tree.travPre(x => output.push(x));
-      expect(output).to.eql(['A', 'B', 'D', 'E', 'C', 'F', 'G']);
+      expect(output).toEqual(['A', 'B', 'D', 'E', 'C', 'F', 'G']);
     });
 
     it('iterative traverse implement', () => {
@@ -129,7 +128,7 @@ describe('Binary Tree', () => {
       }
       const output = [];
       BinNode.travPreIterative(root, x => output.push(x));
-      expect(output).to.eql(['A', 'B', 'D', 'E', 'C', 'F', 'G']);
+      expect(output).toEqual(['A', 'B', 'D', 'E', 'C', 'F', 'G']);
     });
   });
 
@@ -146,7 +145,7 @@ describe('Binary Tree', () => {
       }
       const output = [];
       tree.travIn(x => output.push(x));
-      expect(output).to.eql(['D', 'B', 'E', 'A', 'F', 'C', 'G']);
+      expect(output).toEqual(['D', 'B', 'E', 'A', 'F', 'C', 'G']);
     });
 
     it('iterative traverse implement', () => {
@@ -161,7 +160,7 @@ describe('Binary Tree', () => {
       }
       const output = [];
       BinNode.travInIterative(root, x => output.push(x));
-      expect(output).to.eql(['D', 'B', 'E', 'A', 'F', 'C', 'G']);
+      expect(output).toEqual(['D', 'B', 'E', 'A', 'F', 'C', 'G']);
     });
   });
 
@@ -178,7 +177,7 @@ describe('Binary Tree', () => {
       }
       const output = [];
       tree.travPost(x => output.push(x));
-      expect(output).to.eql(['D', 'E', 'B', 'F', 'G', 'C', 'A']);
+      expect(output).toEqual(['D', 'E', 'B', 'F', 'G', 'C', 'A']);
     });
 
     it('iterative traverse implement', () => {
@@ -193,7 +192,7 @@ describe('Binary Tree', () => {
       }
       const output = [];
       BinNode.travPostIterative(root, x => output.push(x));
-      expect(output).to.eql(['D', 'E', 'B', 'F', 'G', 'C', 'A']);
+      expect(output).toEqual(['D', 'E', 'B', 'F', 'G', 'C', 'A']);
     });
   });
 
@@ -210,7 +209,7 @@ describe('Binary Tree', () => {
       }
       const output = [];
       tree.travLevel(x => output.push(x));
-      expect(output).to.eql(['A', 'B', 'C', 'D', 'E', 'F', 'G']);
+      expect(output).toEqual(['A', 'B', 'C', 'D', 'E', 'F', 'G']);
     });
   });
 });

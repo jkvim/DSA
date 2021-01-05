@@ -1,6 +1,5 @@
 import RBTree from '../src/rbtree';
 import * as BT from '../src/binary_tree';
-import { expect } from 'chai';
 
 const BinNode = BT.BinNode;
 const RB_BLACK = BT.RB_BALCK;
@@ -12,28 +11,28 @@ describe('RBTree', () => {
   describe('isBlack', () => {
     it('should return true if node is black', () => {
       const p = new BinNode('data', null, null, null, 0, 1, RB_BLACK);
-      expect(RBTree.isBlack(p)).to.be.true;
+      expect(RBTree.isBlack(p)).toBe(true);
     });
 
     it('should return false if node is red', () => {
       const p = new BinNode('data', null, null, null, 0, 1, RB_RED);
-      expect(RBTree.isBlack(p)).to.be.false;
+      expect(RBTree.isBlack(p)).toBe(false);
     });
 
     it('should return true if node is null(external node)', () => {
-      expect(RBTree.isBlack(null)).to.be.true;
+      expect(RBTree.isBlack(null)).toBe(true);
     });
   });
 
   describe('isRed', () => {
     it('should return true if node is red', () => {
       const p = new BinNode('data', null, null, null, 0, 1, RB_RED);
-      expect(RBTree.isRed(p)).to.be.true;
+      expect(RBTree.isRed(p)).toBe(true);
     });
 
     it('should return false if node is balck', () => {
       const p = new BinNode('data', null, null, null, 0, 1, RB_BLACK);
-      expect(RBTree.isRed(p)).to.be.false;
+      expect(RBTree.isRed(p)).toBe(false);
     });
   });
 
@@ -41,13 +40,13 @@ describe('RBTree', () => {
     it('should updateHeight if x is black', () => {
       const p = new BinNode('data', null, null, null, 0, 1, RB_BLACK);
       RBTree.updateHeight(p);
-      expect(p.height).to.equal(0);
+      expect(p.height).toBe(0);
     });
 
     it('should not update height if x is red', () => {
       const p = new BinNode('data', null, null, null, 0, 1, RB_RED);
       RBTree.updateHeight(p);
-      expect(p.height).to.equal(-1);
+      expect(p.height).toBe(-1);
     });
   });
 
@@ -55,14 +54,14 @@ describe('RBTree', () => {
     it('should change root to black', () => {
       const tree = new RBTree();
       tree.insert(0);
-      expect(tree.root.color).to.equal(RB_BLACK);
+      expect(tree.root.color).toBe(RB_BLACK);
     });
 
     it('should insert a red node', () => {
       const tree = new RBTree();
       tree.insert(2);
       tree.insert(1);
-      expect(tree.root.lc.color).to.equal(RB_RED);
+      expect(tree.root.lc.color).toBe(RB_RED);
     });
 
     it('should solve double red problem', () => {
@@ -70,22 +69,22 @@ describe('RBTree', () => {
       const g = tree.insert(3);
       const p = tree.insert(2);
       const v = tree.insert(1);
-      expect(g.color).to.equal(RB_RED);
-      expect(p.color).to.equal(RB_BLACK);
-      expect(v.color).to.equal(RB_RED);
+      expect(g.color).toBe(RB_RED);
+      expect(p.color).toBe(RB_BLACK);
+      expect(v.color).toBe(RB_RED);
     });
   });
 
   describe('remove', () => {
     it('should return false if x not exist', () => {
       const tree = new RBTree();
-      expect(tree.remove(0)).to.be.false;
+      expect(tree.remove(0)).toBe(false);
     });
 
     it('should return true if x exist', () => {
       const tree = new RBTree();
       tree.insert(1);
-      expect(tree.remove(1)).to.be.true;
+      expect(tree.remove(1)).toBe(true);
     });
 
     it('should change successor color', () => {
@@ -94,8 +93,8 @@ describe('RBTree', () => {
       tree.insert(1);
       tree.insert(3);
       tree.remove(2);
-      expect(tree.root.data).to.eql(3);
-      expect(tree.root.color).to.equal(RB_BLACK);
+      expect(tree.root.data).toBe(3);
+      expect(tree.root.color).toBe(RB_BLACK);
     });
   });
 
@@ -108,12 +107,12 @@ describe('RBTree', () => {
       BinNode.attachAsLChild(g, p);
       BinNode.attachAsLChild(p, v);
       tree.solveDoubleRed(v);
-      expect(tree.root.data).to.equal(2);
-      expect(tree.root.lc.data).to.equal(1);
-      expect(tree.root.rc.data).to.equal(3);
-      expect(tree.root.color).to.equal(RB_BLACK);
-      expect(tree.root.lc.color).to.equal(RB_RED);
-      expect(tree.root.rc.color).to.equal(RB_RED);
+      expect(tree.root.data).toBe(2);
+      expect(tree.root.lc.data).toBe(1);
+      expect(tree.root.rc.data).toBe(3);
+      expect(tree.root.color).toBe(RB_BLACK);
+      expect(tree.root.lc.color).toBe(RB_RED);
+      expect(tree.root.rc.color).toBe(RB_RED);
     });
 
     it('should fix RR-1 when uncle is black, p and v in different side', () => {
@@ -125,12 +124,12 @@ describe('RBTree', () => {
       BinNode.attachAsRChild(p, v);
       tree.root = g;
       tree.solveDoubleRed(v);
-      expect(tree.root.data).to.equal(2);
-      expect(tree.root.lc.data).to.equal(1);
-      expect(tree.root.rc.data).to.equal(3);
-      expect(tree.root.color).to.equal(RB_BLACK);
-      expect(tree.root.lc.color).to.equal(RB_RED);
-      expect(tree.root.rc.color).to.equal(RB_RED);
+      expect(tree.root.data).toBe(2);
+      expect(tree.root.lc.data).toBe(1);
+      expect(tree.root.rc.data).toBe(3);
+      expect(tree.root.color).toBe(RB_BLACK);
+      expect(tree.root.lc.color).toBe(RB_RED);
+      expect(tree.root.rc.color).toBe(RB_RED);
     });
 
     it('should fix RR-2 when uncle is red, p and v in one side', () => {
@@ -144,9 +143,9 @@ describe('RBTree', () => {
       BinNode.attachAsRChild(g, u);
       tree.root = g;
       tree.solveDoubleRed(v);
-      expect(p.color).to.equal(RB_BLACK);
-      expect(u.color).to.equal(RB_BLACK);
-      expect(g.height).to.equal(2);
+      expect(p.color).toBe(RB_BLACK);
+      expect(u.color).toBe(RB_BLACK);
+      expect(g.height).toBe(2);
     });
 
     it('should fix RR-2 when uncle is red, p and v in different side', () => {
@@ -162,9 +161,9 @@ describe('RBTree', () => {
       BinNode.attachAsRChild(g, u);
       tree.root = gg;
       tree.solveDoubleRed(v);
-      expect(g.color).to.equal(RB_RED);
-      expect(p.color).to.equal(RB_BLACK);
-      expect(u.color).to.equal(RB_BLACK);
+      expect(g.color).toBe(RB_RED);
+      expect(p.color).toBe(RB_BLACK);
+      expect(u.color).toBe(RB_BLACK);
     });
   });
 
@@ -180,8 +179,8 @@ describe('RBTree', () => {
       const tree = new RBTree();
       tree.root = p;
       tree.solveDoubleBlack(r);
-      expect(tree.root.data).to.equal('s');
-      expect(t.color).to.equal(RB_BLACK);
+      expect(tree.root.data).toBe('s');
+      expect(t.color).toBe(RB_BLACK);
     });
 
     it('should fix BB-2-R', () => {
@@ -193,8 +192,8 @@ describe('RBTree', () => {
       const tree = new RBTree();
       tree.root = p;
       tree.solveDoubleBlack(r);
-      expect(p.color).to.equal(RB_BLACK);
-      expect(s.color).to.equal(RB_RED);
+      expect(p.color).toBe(RB_BLACK);
+      expect(s.color).toBe(RB_RED);
     });
 
     it('should fix BB-2-B', () => {
@@ -206,7 +205,7 @@ describe('RBTree', () => {
       const tree = new RBTree();
       tree.root = p;
       tree.solveDoubleBlack(r);
-      expect(s.color).to.equal(RB_RED);
+      expect(s.color).toBe(RB_RED);
     });
 
     it('should fix BB-3', () => {
@@ -222,8 +221,8 @@ describe('RBTree', () => {
       const tree = new RBTree();
       tree.root = p;
       tree.solveDoubleBlack(r);
-      expect(s.color).to.equal(RB_BLACK);
-      expect(p.lc).to.eql(src);
+      expect(s.color).toBe(RB_BLACK);
+      expect(p.lc).toEqual(src);
     });
   });
 });

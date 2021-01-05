@@ -1,18 +1,16 @@
-import sinon from 'sinon';
 import { BTNode, BTree } from '../src/btree';
-import { expect } from 'chai';
 
 describe('Btree', () => {
   describe('empty', () => {
     it('should return true when the tree is empty', () => {
       const tree = new BTree();
-      expect(tree.empty()).to.be.true;
+      expect(tree.empty).toBe(true);
     });
 
     it('should return false when the tree is not empty', () => {
       const tree = new BTree();
       tree.insert(3);
-      expect(tree.empty()).to.be.false;
+      expect(tree.empty).toBe(false);
     });
   });
 
@@ -23,8 +21,8 @@ describe('Btree', () => {
       const rc = new BTNode(3);
       const p = new BTNode(2, lc, rc);
       tree.root = p;
-      expect(tree.search(3)).to.eql(rc);
-      expect(tree.search(1)).to.eql(lc);
+      expect(tree.search(3)).toEqual(rc);
+      expect(tree.search(1)).toEqual(lc);
     });
 
     it('should return null if not found', () => {
@@ -33,21 +31,21 @@ describe('Btree', () => {
       const rc = new BTNode(3);
       const p = new BTNode(2, lc, rc);
       tree.root = p;
-      expect(tree.search(5)).to.be.null;
+      expect(tree.search(5)).toBeNull();
     });
   });
 
   describe('insert', () => {
     it('insert as root if tree is empty', () => {
       const tree = new BTree();
-      expect(tree.insert(3)).to.be.true;
-      expect(tree.root.key.get(0)).to.equal(3);
+      expect(tree.insert(3)).toBe(true);
+      expect(tree.root.key.get(0)).toBe(3);
     });
 
     it('should return false if is exists', () => {
       const tree = new BTree();
       tree.insert(3);
-      expect(tree.insert(3)).to.be.false;
+      expect(tree.insert(3)).toBe(false);
     });
 
     it('should insert to same node while no overflow', () => {
@@ -55,8 +53,8 @@ describe('Btree', () => {
       tree.insert(3);
       tree.insert(2);
       tree.insert(1);
-      expect(tree.size).to.equal(3);
-      expect(tree.root.key.raw()).to.eql([1, 2, 3]);
+      expect(tree.size).toBe(3);
+      expect(tree.root.key.raw()).toEqual([1, 2, 3]);
     });
 
     it('should soveOverflow when child size greater than order', () => {
@@ -65,8 +63,8 @@ describe('Btree', () => {
       tree.insert(2);
       tree.insert(1);
       tree.insert(0);
-      expect(tree.size).to.equal(4);
-      expect(tree.root.child.size()).to.be.at.most(4);
+      expect(tree.size).toBe(4);
+      expect(tree.root.child.size()).toBeLessThanOrEqual(4);
     });
   });
 
@@ -76,7 +74,7 @@ describe('Btree', () => {
       for (let i = 0; i < 5; i++) {
         tree.insert(i);
       }
-      expect(tree.remove(5)).to.be.false;
+      expect(tree.remove(5)).toBe(false);
     });
 
     it('should remove the element', () => {
@@ -84,9 +82,9 @@ describe('Btree', () => {
       tree.insert(0);
       tree.insert(1);
       tree.insert(2);
-      expect(tree.remove(2)).to.be.true;
-      expect(tree.size).to.equal(2);
-      expect(tree.root.key.raw()).to.eql([0, 1]);
+      expect(tree.remove(2)).toBe(true);
+      expect(tree.size).toBe(2);
+      expect(tree.root.key.raw()).toEqual([0, 1]);
     });
 
     it('should solve underflow when child size less than half of order', () => {
@@ -96,8 +94,8 @@ describe('Btree', () => {
       const p = new BTNode(2, lc, rc);
       tree.root = p;
       tree.size = 3;
-      expect(tree.remove(3)).to.be.true;
-      expect(tree.root.key.raw()).to.eql([1, 2]);
+      expect(tree.remove(3)).toBe(true);
+      expect(tree.root.key.raw()).toEqual([1, 2]);
     });
   });
 
@@ -108,9 +106,9 @@ describe('Btree', () => {
         tree.insert(i);
       }
       const { key, child } = tree.root;
-      expect(key.raw()).to.eql([2]);
-      expect(child.get(0).key.raw()).to.eql([1]);
-      expect(child.get(1).key.raw()).to.eql([3]);
+      expect(key.raw()).toEqual([2]);
+      expect(child.get(0).key.raw()).toEqual([1]);
+      expect(child.get(1).key.raw()).toEqual([3]);
     });
 
     it('should insert 4 next to 3', () => {
@@ -119,9 +117,9 @@ describe('Btree', () => {
         tree.insert(i);
       }
       const { key, child } = tree.root;
-      expect(key.raw()).to.eql([2]);
-      expect(child.get(0).key.raw()).to.eql([1]);
-      expect(child.get(1).key.raw()).to.eql([3, 4]);
+      expect(key.raw()).toEqual([2]);
+      expect(child.get(0).key.raw()).toEqual([1]);
+      expect(child.get(1).key.raw()).toEqual([3, 4]);
     });
 
     it('should lift 4 to parent', () => {
@@ -130,10 +128,10 @@ describe('Btree', () => {
         tree.insert(i);
       }
       const { key, child } = tree.root;
-      expect(key.raw()).to.eql([2, 4]);
-      expect(child.get(0).key.raw()).to.eql([1]);
-      expect(child.get(1).key.raw()).to.eql([3]);
-      expect(child.get(2).key.raw()).to.eql([5]);
+      expect(key.raw()).toEqual([2, 4]);
+      expect(child.get(0).key.raw()).toEqual([1]);
+      expect(child.get(1).key.raw()).toEqual([3]);
+      expect(child.get(2).key.raw()).toEqual([5]);
     });
 
     it('should insert 6 next 5', () => {
@@ -142,10 +140,10 @@ describe('Btree', () => {
         tree.insert(i);
       }
       const { key, child } = tree.root;
-      expect(key.raw()).to.eql([2, 4]);
-      expect(child.get(0).key.raw()).to.eql([1]);
-      expect(child.get(1).key.raw()).to.eql([3]);
-      expect(child.get(2).key.raw()).to.eql([5, 6]);
+      expect(key.raw()).toEqual([2, 4]);
+      expect(child.get(0).key.raw()).toEqual([1]);
+      expect(child.get(1).key.raw()).toEqual([3]);
+      expect(child.get(2).key.raw()).toEqual([5, 6]);
     });
   });
 
@@ -156,13 +154,13 @@ describe('Btree', () => {
         tree.insert(i);
       }
       const { key, child } = tree.root;
-      expect(key.raw()).to.eql([5]);
-      expect(child.get(0).key.raw()).to.eql([3, 4]);
-      expect(child.get(1).key.raw()).to.eql([6]);
+      expect(key.raw()).toEqual([5]);
+      expect(child.get(0).key.raw()).toEqual([3, 4]);
+      expect(child.get(1).key.raw()).toEqual([6]);
       tree.remove(6);
-      expect(key.raw()).to.eql([4]);
-      expect(child.get(0).key.raw()).to.eql([3]);
-      expect(child.get(1).key.raw()).to.eql([5]);
+      expect(key.raw()).toEqual([4]);
+      expect(child.get(0).key.raw()).toEqual([3]);
+      expect(child.get(1).key.raw()).toEqual([5]);
     });
 
     it('should borrow from parent if right sibling is large enough', () => {
@@ -171,15 +169,15 @@ describe('Btree', () => {
         tree.insert(i);
       }
       const { key, child } = tree.root;
-      expect(key.raw()).to.eql([2, 4]);
-      expect(child.get(0).key.raw()).to.eql([1]);
-      expect(child.get(1).key.raw()).to.eql([3]);
-      expect(child.get(2).key.raw()).to.eql([5, 6]);
+      expect(key.raw()).toEqual([2, 4]);
+      expect(child.get(0).key.raw()).toEqual([1]);
+      expect(child.get(1).key.raw()).toEqual([3]);
+      expect(child.get(2).key.raw()).toEqual([5, 6]);
       tree.remove(3);
-      expect(key.raw()).to.eql([2, 5]);
-      expect(child.get(0).key.raw()).to.eql([1]);
-      expect(child.get(1).key.raw()).to.eql([4]);
-      expect(child.get(2).key.raw()).to.eql([6]);
+      expect(key.raw()).toEqual([2, 5]);
+      expect(child.get(0).key.raw()).toEqual([1]);
+      expect(child.get(1).key.raw()).toEqual([4]);
+      expect(child.get(2).key.raw()).toEqual([6]);
     });
 
     it('should swap with successor if is not leaf', () => {
@@ -188,9 +186,9 @@ describe('Btree', () => {
         tree.insert(i);
       }
       const { child } = tree.root;
-      expect(tree.root.key.raw()).to.eql([2]);
+      expect(tree.root.key.raw()).toEqual([2]);
       tree.remove(2);
-      expect(tree.root.key.raw()).to.eql([1, 3]);
+      expect(tree.root.key.raw()).toEqual([1, 3]);
     });
 
     it('should merge parent and right sibling if right sibling less than half of order', () => {
@@ -199,11 +197,11 @@ describe('Btree', () => {
         tree.insert(i);
       }
       const { child } = tree.root;
-      expect(tree.root.key.raw()).to.eql([2]);
-      expect(child.get(0).key.raw()).to.eql([1]);
-      expect(child.get(1).key.raw()).to.eql([3]);
+      expect(tree.root.key.raw()).toEqual([2]);
+      expect(child.get(0).key.raw()).toEqual([1]);
+      expect(child.get(1).key.raw()).toEqual([3]);
       tree.remove(1);
-      expect(tree.root.key.raw()).to.eql([2, 3]);
+      expect(tree.root.key.raw()).toEqual([2, 3]);
     });
 
     it('should merge parent and left sibling if left sibling less than half of order', () => {
@@ -212,11 +210,11 @@ describe('Btree', () => {
         tree.insert(i);
       }
       const { child } = tree.root;
-      expect(tree.root.key.raw()).to.eql([2]);
-      expect(child.get(0).key.raw()).to.eql([1]);
-      expect(child.get(1).key.raw()).to.eql([3]);
+      expect(tree.root.key.raw()).toEqual([2]);
+      expect(child.get(0).key.raw()).toEqual([1]);
+      expect(child.get(1).key.raw()).toEqual([3]);
       tree.remove(3);
-      expect(tree.root.key.raw()).to.eql([1, 2]);
+      expect(tree.root.key.raw()).toEqual([1, 2]);
     });
   });
 });

@@ -1,5 +1,4 @@
 import GraphMatrix from '../src/graph';
-import { expect } from 'chai';
 
 /* 1 - have an edge and its weight is 1
  * 0 - haven't edge
@@ -25,72 +24,72 @@ describe('Graph', () => {
   describe('constructor', () => {
     it('should build with matrix and vertex', () => {
       const gm = new GraphMatrix(0, 0, vertexs, matrix);
-      expect(gm.n).to.equal(vertexs.length);
-      expect(gm.e).to.equal(11);
+      expect(gm.n).toBe(vertexs.length);
+      expect(gm.e).toBe(11);
     });
   });
 
   describe('vertex', () => {
     it('should return vertex', () => {
       const gm = new GraphMatrix(0, 0, vertexs, matrix);
-      expect(gm.vertex(0).data).to.equal(vertexs[0]);
+      expect(gm.vertex(0).data).toBe(vertexs[0]);
     });
 
     it('should be able to change the vertex status', () => {
       const gm = new GraphMatrix(0, 0, vertexs, matrix);
       gm.vertex(0).status = 'VISITED';
-      expect(gm.vertex(0).status).to.equal('VISITED');
+      expect(gm.vertex(0).status).toBe('VISITED');
     });
   });
 
   describe('firstNbr', () => {
     it('should return first neighbor index', () => {
       const gm = new GraphMatrix(0, 0, vertexs, matrix);
-      expect(gm.firstNbr(0)).to.equal(4);
-      expect(gm.firstNbr(1)).to.equal(-1);
-      expect(gm.firstNbr(2)).to.equal(1);
-      expect(gm.firstNbr(3)).to.equal(1);
+      expect(gm.firstNbr(0)).toBe(4);
+      expect(gm.firstNbr(1)).toBe(-1);
+      expect(gm.firstNbr(2)).toBe(1);
+      expect(gm.firstNbr(3)).toBe(1);
     });
   });
 
   describe('nextNbr', () => {
     it('should return next neighbor index', () => {
       const gm = new GraphMatrix(0, 0, vertexs, matrix);
-      expect(gm.nextNbr(4, 6)).to.equal(5);
-      expect(gm.nextNbr(6, 5)).to.equal(1);
-      expect(gm.nextNbr(7, 0)).to.equal(-1);
+      expect(gm.nextNbr(4, 6)).toBe(5);
+      expect(gm.nextNbr(6, 5)).toBe(1);
+      expect(gm.nextNbr(7, 0)).toBe(-1);
     });
   });
 
   describe('exists', () => {
     it('should return true when edge exist', () => {
       const gm = new GraphMatrix(0, 0, vertexs, matrix);
-      expect(gm.exists(0, 2)).to.be.true;
+      expect(gm.exists(0, 2)).toBe(true);
     });
 
     it('should return false when edge not exist', () => {
       const gm = new GraphMatrix(0, 0, vertexs, matrix);
-      expect(gm.exists(0, 0)).to.be.false;
+      expect(gm.exists(0, 0)).toBe(false);
     });
   });
 
   describe('inDegree', () => {
     it('should return vertex inDegree', () => {
       const gm = new GraphMatrix(0, 0, vertexs, matrix);
-      expect(gm.inDegree(0)).to.equal(1);
-      expect(gm.inDegree(1)).to.equal(3);
-      expect(gm.inDegree(2)).to.equal(2);
-      expect(gm.inDegree(3)).to.equal(1);
+      expect(gm.inDegree(0)).toBe(1);
+      expect(gm.inDegree(1)).toBe(3);
+      expect(gm.inDegree(2)).toBe(2);
+      expect(gm.inDegree(3)).toBe(1);
     });
   });
 
   describe('outDegree', () => {
     it('should return vertex outDegree', () => {
       const gm = new GraphMatrix(0, 0, vertexs, matrix);
-      expect(gm.outDegree(0)).to.equal(2);
-      expect(gm.outDegree(1)).to.equal(0);
-      expect(gm.outDegree(2)).to.equal(1);
-      expect(gm.outDegree(3)).to.equal(1);
+      expect(gm.outDegree(0)).toBe(2);
+      expect(gm.outDegree(1)).toBe(0);
+      expect(gm.outDegree(2)).toBe(1);
+      expect(gm.outDegree(3)).toBe(1);
     });
   });
 
@@ -98,7 +97,7 @@ describe('Graph', () => {
     it('should return status of ith vertex', () => {
       const gm = new GraphMatrix(0, 0, vertexs, matrix);
       gm.vertex(0).status = 'DISCOVER';
-      expect(gm.status(0)).to.equal('DISCOVER');
+      expect(gm.status(0)).toBe('DISCOVER');
     });
   });
 
@@ -106,7 +105,7 @@ describe('Graph', () => {
     it('should return dTime of ith vertex', () => {
       const gm = new GraphMatrix(0, 0, vertexs, matrix);
       gm.vertex(0).dTime = 1;
-      expect(gm.dTime(0)).to.equal(1);
+      expect(gm.dTime(0)).toBe(1);
     });
   });
 
@@ -114,7 +113,7 @@ describe('Graph', () => {
     it('should return fTime of ith vertex', () => {
       const gm = new GraphMatrix(0, 0, vertexs, matrix);
       gm.vertex(0).fTime = 1;
-      expect(gm.fTime(0)).to.equal(1);
+      expect(gm.fTime(0)).toBe(1);
     });
   });
 
@@ -122,7 +121,7 @@ describe('Graph', () => {
     it('should return parent of ith vertex', () => {
       const gm = new GraphMatrix(0, 0, vertexs, matrix);
       gm.vertex(0).parent = 1;
-      expect(gm.parent(0)).to.equal(1);
+      expect(gm.parent(0)).toBe(1);
     });
   });
 
@@ -130,34 +129,34 @@ describe('Graph', () => {
     it('should return priority of ith vertex', () => {
       const gm = new GraphMatrix(0, 0, vertexs, matrix);
       gm.vertex(0).priority = 1;
-      expect(gm.priority(0)).to.equal(1);
+      expect(gm.priority(0)).toBe(1);
     });
   });
 
   describe('insertVertex', () => {
     it('should insert a vertex', () => {
       const gm = new GraphMatrix(0, 0, vertexs, matrix);
-      expect(gm.n).to.equal(8);
+      expect(gm.n).toBe(8);
       gm.insertVertex('Z');
-      expect(gm.n).to.equal(9);
+      expect(gm.n).toBe(9);
     });
   });
 
   describe('removeVertex', () => {
     it('should remove a vertex', () => {
       const gm = new GraphMatrix(0, 0, vertexs, matrix);
-      expect(gm.removeVertex(0).data).to.equal('A');
-      expect(gm.vertex(0).data).to.equal('B');
-      expect(gm.vertex(1).inDegree).to.equal(1);  // inDegree of 'C'
-      expect(gm.vertex(6).outDegree).to.equal(2);
-      expect(gm.n).to.equal(7);
+      expect(gm.removeVertex(0).data).toBe('A');
+      expect(gm.vertex(0).data).toBe('B');
+      expect(gm.vertex(1).inDegree).toBe(1);  // inDegree of 'C'
+      expect(gm.vertex(6).outDegree).toBe(2);
+      expect(gm.n).toBe(7);
     });
   });
 
   describe('edge', () => {
     it('should return edge', () => {
       const gm = new GraphMatrix(0, 0, vertexs, matrix);
-      expect(gm.edge(0, 2).weight).to.equal(1);
+      expect(gm.edge(0, 2).weight).toBe(1);
     });
   });
 
@@ -165,9 +164,9 @@ describe('Graph', () => {
     it('should insert edge', () => {
       const gm = new GraphMatrix(0, 0, vertexs, matrix);
       gm.insertEdge(100, 1, 0, 0);
-      expect(gm.edge(0, 0).data).to.equal(100);
-      expect(gm.outDegree(0)).to.equal(3);
-      expect(gm.inDegree(0)).to.equal(2);
+      expect(gm.edge(0, 0).data).toBe(100);
+      expect(gm.outDegree(0)).toBe(3);
+      expect(gm.inDegree(0)).toBe(2);
     });
   });
 
@@ -175,9 +174,9 @@ describe('Graph', () => {
     it('should remove edge', () => {
       const gm = new GraphMatrix(0, 0, vertexs, matrix);
       gm.removeEdge(0, 2);
-      expect(gm.edge(0, 2)).to.be.null;
-      expect(gm.inDegree(2)).to.equal(1);
-      expect(gm.outDegree(0)).to.equal(1);
+      expect(gm.edge(0, 2)).toBeNull();
+      expect(gm.inDegree(2)).toBe(1);
+      expect(gm.outDegree(0)).toBe(1);
     });
   });
 });

@@ -1,4 +1,3 @@
-import { expect } from "chai";
 import { dfs, dfsIterate, dfsRecursive, TreeNode, FiberNode } from "../src/dfs";
 
 function buildTree() {
@@ -49,13 +48,13 @@ describe("dfs", () => {
   it("should traverse in depth first sequence", () => {
     const tree = buildTree()
     
-    expect(dfs(tree)).to.deep.equal(["A", "B", "D", "E", "C", "F", "G"]);
+    expect(dfs(tree)).toEqual(["A", "B", "D", "E", "C", "F", "G"]);
   });
 
   it("should traverse in depth first sequence by recursive", () => {
     const tree = buildTree()
 
-    expect(dfsRecursive(tree)).to.deep.equal([
+    expect(dfsRecursive(tree)).toEqual([
       "A",
       "B",
       "D",
@@ -77,6 +76,6 @@ describe("fiber dfs", () => {
 
     dfsIterate(rootFiber, visit);
 
-    expect(result).to.deep.equal(["A", "B", "D", "E", "C", "F", "G"]);
+    expect(result).toEqual(["A", "B", "D", "E", "C", "F", "G"]);
   });
 });

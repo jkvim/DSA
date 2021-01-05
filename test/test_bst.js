@@ -1,20 +1,19 @@
 import Queue from '../src/queue';
 import BST from '../src/bst';
 import { BinNode } from '../src/binary_tree';
-import { expect } from 'chai';
 
 describe('BST', () => {
   describe('insert', () => {
     it('should insert as left child', () => {
       const tree = new BST();
       const root = tree.insertAsRoot(1);
-      expect(tree.insert(0)).to.eql(root.lc);
+      expect(tree.insert(0)).toEqual(root.lc);
     });
 
     it('should insert as right child', () => {
       const tree = new BST();
       const root = tree.insertAsRoot(1);
-      expect(tree.insert(2)).to.eql(root.rc);
+      expect(tree.insert(2)).toEqual(root.rc);
     });
   });
 
@@ -28,7 +27,7 @@ describe('BST', () => {
         q.enqueue(tree.insertAsLC(node, i));
         q.enqueue(tree.insertAsRC(node, i + 1));
       }
-      expect(tree.search(6).data).to.equal(6);
+      expect(tree.search(6).data).toBe(6);
     });
 
     it('should return null when not found', () => {
@@ -40,14 +39,14 @@ describe('BST', () => {
         q.enqueue(tree.insertAsLC(node, i));
         q.enqueue(tree.insertAsRC(node, i + 1));
       }
-      expect(tree.search(7)).to.be.null;
+      expect(tree.search(7)).toBeNull();
     });
   });
 
   describe('remove', () => {
     it('should return false when element not exists', () => {
       const tree = new BST();
-      expect(tree.remove(0)).to.be.false;
+      expect(tree.remove(0)).toBe(false);
     });
 
     it('should return true when element is removed', () => {
@@ -59,8 +58,8 @@ describe('BST', () => {
         q.enqueue(tree.insertAsLC(node, i));
         q.enqueue(tree.insertAsRC(node, i + 1));
       }
-      expect(tree.remove(0)).to.be.true;
-      expect(tree.size).to.equal(6);
+      expect(tree.remove(0)).toBe(true);
+      expect(tree.size).toBe(6);
     });
   });
 
@@ -69,16 +68,16 @@ describe('BST', () => {
       const tree = new BST();
       const root = tree.insertAsRoot(0);
       tree.insert(1);
-      expect(tree.removeAt(tree.search(0)).data).to.equal(1);
-      expect(tree.root.data).to.equal(1);
+      expect(tree.removeAt(tree.search(0)).data).toBe(1);
+      expect(tree.root.data).toBe(1);
     });
 
     it('should return left child when no right child', () => {
       const tree = new BST();
       const root = tree.insertAsRoot(1);
       tree.insert(0);
-      expect(tree.removeAt(tree.search(1)).data).to.equal(0);
-      expect(tree.root.data).to.equal(0);
+      expect(tree.removeAt(tree.search(1)).data).toBe(0);
+      expect(tree.root.data).toBe(0);
     });
 
     it('should return succ when have both right child and left child', () => {
@@ -86,8 +85,8 @@ describe('BST', () => {
       const root = tree.insertAsRoot(1);
       tree.insert(0);
       tree.insert(2);
-      expect(tree.removeAt(tree.search(1))).to.be.null;
-      expect(tree.root.data).to.equal(2);
+      expect(tree.removeAt(tree.search(1))).toBeNull();
+      expect(tree.root.data).toBe(2);
     });
   });
 
@@ -104,7 +103,7 @@ describe('BST', () => {
       tree.root = tree.rotateAt(v);
       const output = [];
       tree.travIn(x => output.push(x));
-      expect(output).to.eql([0, 1, 2, 3, 4, 5, 6]);
+      expect(output).toEqual([0, 1, 2, 3, 4, 5, 6]);
     });
 
     it('should do zag(p) and zig(g)', () => {
@@ -119,7 +118,7 @@ describe('BST', () => {
       tree.root = tree.rotateAt(v);
       const output = [];
       tree.travIn(x => output.push(x));
-      expect(output).to.eql([0, 1, 2, 3, 4, 5, 6]);
+      expect(output).toEqual([0, 1, 2, 3, 4, 5, 6]);
     });
 
     it('should do zag(g)', () => {
@@ -134,7 +133,7 @@ describe('BST', () => {
       tree.root = tree.rotateAt(v);
       const output = [];
       tree.travIn(x => output.push(x));
-      expect(output).to.eql([0, 1, 2, 3, 4, 5, 6]);
+      expect(output).toEqual([0, 1, 2, 3, 4, 5, 6]);
     });
 
     it('should do zig(p) and zag(g)', () => {
@@ -149,7 +148,7 @@ describe('BST', () => {
       tree.root = tree.rotateAt(v);
       const output = [];
       tree.travIn(x => output.push(x));
-      expect(output).to.eql([0, 1, 2, 3, 4, 5, 6]);
+      expect(output).toEqual([0, 1, 2, 3, 4, 5, 6]);
     });
   });
 
@@ -166,7 +165,7 @@ describe('BST', () => {
       const tree = new BST(1, b);
       const output = [];
       tree.travIn(x => output.push(x));
-      expect(output).to.eql(['T0', 'a', 'T1', 'b', 'T2', 'c', 'T3']);
+      expect(output).toEqual(['T0', 'a', 'T1', 'b', 'T2', 'c', 'T3']);
     });
   });
 });
