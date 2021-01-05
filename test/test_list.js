@@ -28,7 +28,7 @@ describe('List', () => {
   describe('empty', () => {
     it('should not empty', () => {
       const list = new List([1]);
-      expect(list.empty).toBe(false);
+      expect(list.empty()).toBe(false);
     });
   });
 

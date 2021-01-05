@@ -66,7 +66,6 @@ class RBTree extends BST {
       if (BinNode.isLChild(x) === BinNode.isLChild(p)) {
         p.color = RB_BLACK;
       } else {
-        console.log('render x to black');
         x.color = RB_BLACK;
       }
       g.color = RB_RED;

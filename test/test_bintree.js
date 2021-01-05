@@ -11,7 +11,7 @@ describe('Binary Tree', () => {
   describe('empty', () => {
     it('should return true when the tree is empty', () => {
       const s = new BinTree();
-      expect(s.empty).toBe(true);
+      expect(s.empty()).toBe(true);
     });
   });
 

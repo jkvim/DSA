@@ -139,7 +139,6 @@ class BTree {
     if (r > 0) {
       const ls = p.child.get(r - 1);
       if ((this.order + 1) / 2 < ls.child.size()) {
-        console.log('borrow from left');
         v.key.insert(0, p.key.get(r - 1));
         p.key.set(r - 1, ls.key.remove(ls.key.size() - 1));
         v.child.insert(0, ls.child.remove(ls.child.size() - 1));

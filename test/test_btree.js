@@ -4,13 +4,13 @@ describe('Btree', () => {
   describe('empty', () => {
     it('should return true when the tree is empty', () => {
       const tree = new BTree();
-      expect(tree.empty).toBe(true);
+      expect(tree.empty()).toBe(true);
     });
 
     it('should return false when the tree is not empty', () => {
       const tree = new BTree();
       tree.insert(3);
-      expect(tree.empty).toBe(false);
+      expect(tree.empty()).toBe(false);
     });
   });
 

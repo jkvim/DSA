@@ -107,7 +107,7 @@ describe('HashTable', () => {
       const ht = new HashTable();
       const oldCapacity = ht.capacity();
       ht.rehash();
-      expect(ht.capacity()).to.satisfy((n) => n === 2 * oldCapacity);
+      expect(ht.capacity()).toBe(2 * oldCapacity);
     });
   });
 

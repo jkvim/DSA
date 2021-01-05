@@ -171,7 +171,6 @@ describe('Priority Queue', () => {
         while (!heap1.empty) {
           heap2.insert(new BinNode(heap1.delMax()));
         }
-        expect(heap2.size).toBe(7);
         expect(heap2.getMax()).toBe(7);
       });
     });

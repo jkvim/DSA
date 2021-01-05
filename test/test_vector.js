@@ -89,12 +89,12 @@ describe('Vector', () => {
   describe('empty', () => {
     it('should get true when empty', () => {
       const vector = new Vector([]);
-      expect(vector.empty).toBe(true);
+      expect(vector.empty()).toBe(true);
     });
 
     it('should get false when not empty', () => {
       const vector = new Vector([1, 2, 3]);
-      expect(vector.empty).toBe(false);
+      expect(vector.empty()).toBe(false);
     });
   });
 
