@@ -26,3 +26,18 @@ export function selectionSort(a) {
   }
   return a;
 }
+
+
+/**
+ * 
+ * @param {Array} a 
+ */
+export function insertSort(a) {
+  const n = a.length
+  for (let i = 1; i < n; i++) {
+    for (let j = i; j > 0 && less(a[j], a[j - 1]); j--) {
+      exchange(a, j, j - 1)
+    }
+  }
+  return a
+}
