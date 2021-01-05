@@ -1,4 +1,4 @@
-import { insertSort, selectionSort } from '../src/sort';
+import { insertSort, selectionSort, shellSort } from '../src/sort';
 
 describe('Sort', () => {
   it('Selection Sort', () => {
@@ -12,4 +12,10 @@ describe('Sort', () => {
     const expected = [0, 1, 3, 4, 5, 5, 8, 10]
     expect(insertSort(list)).toEqual(expected);
   });
+
+  it('Shell Sort', () => {
+    const list = [4, 3, 1, 5, 5, 8, 0, 10]
+    const expected = [0, 1, 3, 4, 5, 5, 8, 10]
+    expect(shellSort(list)).toEqual(expected);
+  })
 })
