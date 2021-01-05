@@ -1,4 +1,4 @@
-import { insertSort, selectionSort, shellSort } from '../src/sort';
+import { insertSort, selectionSort, shellSort } from '../src/sort_algorithms';
 
 describe('Sort', () => {
   it('Selection Sort', () => {
